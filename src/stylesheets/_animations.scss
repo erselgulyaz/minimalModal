@@ -1,0 +1,31 @@
+@keyframes topToCenter {
+  from {
+    top: -150px;
+  } to {
+    top: 0;
+  }
+}
+
+@keyframes bottomToCenter {
+  from {
+    top: 150px;
+  } to {
+    top: 0;
+  }
+}
+
+@keyframes leftToCenter {
+  from {
+    left: -150px;
+  } to {
+    left: 0;
+  }
+}
+
+@keyframes rightToCenter {
+  from {
+    right: -150px;
+  } to {
+    right: 0;
+  }
+}

@@ -1,0 +1,66 @@
+@import './mixins';
+@import './animations';
+
+.minimal-modal {
+  
+  @include transition(all .2s ease-in-out);
+  background-color: #fff;
+  display: inline-block;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  
+  &__outer-wrapper {
+    @include transition(all .2s ease-in-out);
+    background-color: rgba(0,0,0,.7);
+    display: table;
+    height: 100%;
+    left: 0;
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    visibility: visible;
+    width: 100%;
+    z-index: 9000;
+  }
+  
+  &__outer-wrapper--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  &__inner-wrapper {
+    @include transition(all .2s ease-in-out);
+    display: table-cell;
+    opacity: 1;
+    text-align: center;
+    vertical-align: middle;
+    visibility: visible;
+  }
+  
+  &__inner-wrapper--hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__animation {
+    animation-duration: 1.5s;
+  }
+
+  &__animation--topToCenter {
+    animation-name: topToCenter;
+  }
+  
+  &__animation--bottomToCenter {
+    animation-name: bottomToCenter;
+  }
+  
+  &__animation--leftToCenter {
+    animation-name: leftToCenter;
+  }
+  
+  &__animation--rightToCenter {
+    animation-name: rightToCenter;
+  }
+
+}
