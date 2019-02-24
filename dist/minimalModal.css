@@ -4,11 +4,23 @@
   to {
     top: 0; } }
 
+@keyframes centerToTop {
+  from {
+    top: 0; }
+  to {
+    top: -150px; } }
+
 @keyframes bottomToCenter {
   from {
     top: 150px; }
   to {
     top: 0; } }
+
+@keyframes centerToBottom {
+  from {
+    top: 0; }
+  to {
+    top: 150px; } }
 
 @keyframes leftToCenter {
   from {
@@ -16,11 +28,23 @@
   to {
     left: 0; } }
 
+@keyframes centerToLeft {
+  from {
+    left: 0; }
+  to {
+    left: -150px; } }
+
 @keyframes rightToCenter {
   from {
     right: -150px; }
   to {
     right: 0; } }
+
+@keyframes centerToRight {
+  from {
+    right: 0; }
+  to {
+    right: -150px; } }
 
 .minimal-modal {
   -moz-transition: all 0.2s ease-in-out;
@@ -50,6 +74,12 @@
   .minimal-modal__outer-wrapper--hidden {
     opacity: 0;
     visibility: hidden; }
+  .minimal-modal__close-band {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%; }
   .minimal-modal__inner-wrapper {
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
@@ -67,9 +97,17 @@
     animation-duration: 1.5s; }
   .minimal-modal__animation--topToCenter {
     animation-name: topToCenter; }
+  .minimal-modal__animation--centerToTop {
+    animation-name: centerToTop; }
   .minimal-modal__animation--bottomToCenter {
     animation-name: bottomToCenter; }
+  .minimal-modal__animation--centerToBottom {
+    animation-name: centerToBottom; }
   .minimal-modal__animation--leftToCenter {
     animation-name: leftToCenter; }
+  .minimal-modal__animation--centerToLeft {
+    animation-name: centerToLeft; }
   .minimal-modal__animation--rightToCenter {
     animation-name: rightToCenter; }
+  .minimal-modal__animation--centerToRight {
+    animation-name: centerToRight; }

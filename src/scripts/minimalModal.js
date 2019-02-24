@@ -3,7 +3,7 @@ class minimalModal {
   constructor(options = {}) {
     const defaults = { /* parameters */
       startAnimation : "topToCenter",
-      endAnimation : "top",
+      endAnimation : "centerToTop",
       maxWidth : 600,
       maxHeight : 400,
       xPosition : "center",
@@ -29,9 +29,13 @@ class minimalModal {
 
   template() {
     let outerTemplate = "", innerTemplate = "";
+
+    const closeBandTemplate = this.hiddenForGradientClick ? `<div class="minimal-modal__close-band"></div>` : "";
+    
   
     outerTemplate += `
       <div class="minimal-modal__outer-wrapper minimal-modal__outer-wrapper--hidden">
+        ${closeBandTemplate}
         <div class="minimal-modal__inner-wrapper minimal-modal__inner-wrapper--hidden"></div>
       </div>
     `;
@@ -43,6 +47,8 @@ class minimalModal {
     `;
 
     this.open(outerTemplate, innerTemplate);
+
+    this.hiddenForGradientClick && this.gradientClick();
   }
   
   open(outerTemplate, innerTemplate) {
@@ -52,43 +58,74 @@ class minimalModal {
     /* add outer items */
     outer.innerHTML = outerTemplate;
     document.body.innerHTML = outerTemplate;
-    this.elementVisible("minimal-modal__outer-wrapper--hidden", 250);
+    this.elementVisible("minimal-modal__outer-wrapper", "minimal-modal__outer-wrapper--hidden", 250, "visible");
     
     /* add minimalModal content */
     modal.innerHTML = innerTemplate;
     document.querySelector(".minimal-modal__inner-wrapper").innerHTML += modal.innerHTML;
-    this.elementVisible("minimal-modal__inner-wrapper--hidden", 500);
+    this.elementVisible("minimal-modal__inner-wrapper", "minimal-modal__inner-wrapper--hidden", 500, "visible");
     
     /* add start animation class */
-    const modalStartClass = this.firstAnimation();
+    const modalStartClass = this.modalAnimationClass("start");
     document.querySelector(".minimal-modal").classList.add(modalStartClass);
+
+    /* close buttons actions */
+    const closeButtons = document.querySelectorAll(`[data-minimalmodal-close]`);
+    if (closeButtons) {
+      Array.prototype.forEach.call(closeButtons, closeButton => {
+        closeButton.addEventListener("click", () => {
+          this.close();
+        });
+      })
+    }
+
   }
 
-  elementVisible(elementClass, time) {
+  elementVisible(selector, actionClass, time, type) {
     setTimeout(() => {
-      document.querySelector(`.${elementClass}`).classList.remove(elementClass);
+      if ( type === "visible" ) {
+        document.querySelector(`.${selector}`).classList.remove(actionClass);
+      } else if ( type === "hidden" ) {
+        document.querySelector(`.${selector}`).classList.add(actionClass);
+      }
     }, time);
   }
 
-  firstAnimation() {
+  modalAnimationClass(type) {
     let animationClass = "";
 
-    if ( this.startAnimation === "topToCenter" ) {
-      animationClass = "minimal-modal__animation--topToCenter";
-    } else if ( this.startAnimation === "bottomToCenter" ) {
-      animationClass = "minimal-modal__animation--bottomToCenter";
-    } else if ( this.startAnimation === "leftToCenter" ) {
-      animationClass = "minimal-modal__animation--leftToCenter";
-    } else if ( this.startAnimation === "rightToCenter" ) {
-      animationClass = "minimal-modal__animation--rightToCenter";
+    const animationPrefix = "minimal-modal__animation--";
+
+    if ( type === "start" ) {
+      animationClass = `${animationPrefix}${this.startAnimation}`;
+    } else { /* type === "end" */
+      animationClass = `${animationPrefix}${this.endAnimation}`;
     }
 
     return animationClass;
+
   }
 
-  lastAnimation() {}
+  gradientClick() {
+    document.querySelector(".minimal-modal__close-band").addEventListener("click", () => {
+      this.close();
+    });
+  }
   
-  close() {}
+  close() {
+    const outer = document.querySelector(".minimal-modal__outer-wrapper");
+    const modalEndClass = this.modalAnimationClass("end");
+    document.querySelector(".minimal-modal").classList.add(modalEndClass);
+
+    this.elementVisible("minimal-modal__inner-wrapper", "minimal-modal__inner-wrapper--hidden", 250, "hidden");
+
+    this.elementVisible("minimal-modal__outer-wrapper", "minimal-modal__outer-wrapper--hidden", 500, "hidden");
+    
+    setTimeout(() => {
+      outer.parentNode.removeChild(outer);
+    },700);
+
+  }
   
   init() {
     this.template();

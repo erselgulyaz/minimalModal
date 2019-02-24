@@ -28,6 +28,14 @@
     opacity: 0;
     visibility: hidden;
   }
+
+  &__close-band {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
   
   &__inner-wrapper {
     @include transition(all .2s ease-in-out);
@@ -51,16 +59,32 @@
     animation-name: topToCenter;
   }
   
+  &__animation--centerToTop {
+    animation-name: centerToTop;
+  }
+  
   &__animation--bottomToCenter {
     animation-name: bottomToCenter;
+  }
+  
+  &__animation--centerToBottom {
+    animation-name: centerToBottom;
   }
   
   &__animation--leftToCenter {
     animation-name: leftToCenter;
   }
   
+  &__animation--centerToLeft {
+    animation-name: centerToLeft;
+  }
+  
   &__animation--rightToCenter {
     animation-name: rightToCenter;
+  }
+  
+  &__animation--centerToRight {
+    animation-name: centerToRight;
   }
 
 }

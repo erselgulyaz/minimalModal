@@ -5,12 +5,27 @@
     top: 0;
   }
 }
+@keyframes centerToTop {
+  from {
+    top: 0;
+  } to {
+    top: -150px;
+  }
+}
 
 @keyframes bottomToCenter {
   from {
     top: 150px;
   } to {
     top: 0;
+  }
+}
+
+@keyframes centerToBottom {
+  from {
+    top: 0;
+  } to {
+    top: 150px;
   }
 }
 
@@ -22,10 +37,26 @@
   }
 }
 
+@keyframes centerToLeft {
+  from {
+    left: 0;
+  } to {
+    left: -150px;
+  }
+}
+
 @keyframes rightToCenter {
   from {
     right: -150px;
   } to {
     right: 0;
+  }
+}
+
+@keyframes centerToRight {
+  from {
+    right: 0;
+  } to {
+    right: -150px;
   }
 }
