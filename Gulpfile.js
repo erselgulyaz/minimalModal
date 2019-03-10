@@ -52,14 +52,23 @@ gulp.task('stylesmin', () => {
   .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('babel', () =>
+gulp.task('unminified', () =>
   gulp.src('./src/scripts/minimalModal.js')
     .pipe(babel({
       presets: ['env']
     }))
-    .pipe(concat('minimalModal.prod.js'))
+    .pipe(concat('minimalModal.unminified.js'))
+    .pipe(gulp.dest('./dist/'))
+);
+
+gulp.task('es6', () =>
+  gulp.src('./src/scripts/minimalModal.js')
+    /* .pipe(babel({
+      presets: ['env']
+    })) */
+    .pipe(concat('minimalModal.es6.js'))
     .pipe(gulp.dest('./dist/'))
 );
 
 gulp.task("default", ["connect", "html", "scripts", "styles"]);
-gulp.task("prod", ["babel", "stylesmin"]);
+gulp.task("prod", ["unminified", "es6", "stylesmin"]);
