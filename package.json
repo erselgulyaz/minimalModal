@@ -2,7 +2,24 @@
   "name": "minimalModal",
   "version": "1.0.0",
   "description": "javascript modal plugin",
-  "author": "Ersel Gülyaz | erselgulyaz@gmail.com",
+  "author": {
+    "name": "Ersel Gülyaz",
+    "email": "erselgulyaz@gmail.com",
+    "url": "http://www.erselgulyaz.com"
+  },
+  "keywords": [
+    "lightbox",
+    "modal",
+    "javascript plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erselgulyaz/minimalModal.git"
+  },
+  "main": "./dist/minimalModal.unminified.js",
+  "bugs": {
+    "url": "https://github.com/erselgulyaz/minimalModal/issues"
+  },
   "dependencies": {
     "gulp": "3.9.0"
   },
